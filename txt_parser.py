@@ -369,7 +369,7 @@ DetailNameMap = {"aircraftName":"飞行器名称", "aircraftSn":"飞行器序列
 
 def ParseTxts():
     root_path = r"./txts" # 需要解析的txt文件放到txts目录下，可实现批量解析
-    fls = os.listdir(r"./txts")
+    fls = os.listdir(root_path)
     for fl in fls:
         if not fl.endswith('.txt'): # 判断文件名后缀是不是.DAT，如果不是则不做处理
             continue

@@ -1,6 +1,7 @@
 import sys
 import dat_parser
 import txt_parser
+import userinfo_parser
 
 
 if __name__ == '__main__':
@@ -19,3 +20,6 @@ if __name__ == '__main__':
     elif sys.argv[1] == "-t":# 只解析txt
         print("开始解析txtS...")
         txt_parser.ParseTxts()
+    elif sys.argv[1] == "-u":# 只解析txt
+        print("开始解析用户信息...")
+        userinfo_parser.ParseUserInfos()
