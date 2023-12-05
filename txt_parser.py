@@ -371,9 +371,9 @@ def ParseTxts():
     root_path = r"./txts" # 需要解析的txt文件放到txts目录下，可实现批量解析
     fls = os.listdir(root_path)
     for fl in fls:
-        if not fl.endswith('.txt'): # 判断文件名后缀是不是.DAT，如果不是则不做处理
+        if not fl.endswith('.txt'): # 判断文件名后缀是不是.txt，如果不是则不做处理
             continue
-        csvfile = open(os.path.join(root_path,fl+".csv"), 'w', newline='') # 每一个dat文件，则新建一个csv文件
+        csvfile = open(os.path.join(root_path,fl+".csv"), 'w', newline='') # 每一个txt文件，则新建一个csv文件
         csv_writer = csv.writer(csvfile)
         csv_writer.writerow(['更新时间','经度','维度',"飞行距离","飞行高度(dm)"]) # 写入表头
 
@@ -392,6 +392,8 @@ def ParseTxts():
             cn_name = DetailNameMap.get(key, "")
             if cn_name != "":
                 print(cn_name, " --- ",value)
+            else:
+                print(key,"  -----  ",value)
         print("飞行日志-----------------")
         for record in txt.ParseRecord():
             # print(record)

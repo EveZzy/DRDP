@@ -87,9 +87,9 @@ def MMKVReadRawVarint32(reader):
     return num
 
 def ParseUserInfos():
-    root_path = r"./mmkvs" # 需要解析的txt文件放到txts目录下，可实现批量解析
+    root_path = r"./mmkvs" # 需要解析的mmkv文件放到mmkvs目录下，可实现批量解析
     fls = os.listdir(root_path)
-    for fl in fls:
+    for fl in fls: 
         full_path = os.path.join(root_path,fl)
         print('需要解析的mmkv文件路径： ',full_path)
         try:
