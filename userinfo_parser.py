@@ -72,8 +72,6 @@ def read_value(reader):
         value = reader.read_data(count)
         return value
 
-
-
 def MMKVReadRawVarint32(reader):
     num = 0
     for i in range(5):
@@ -89,18 +87,25 @@ def MMKVReadRawVarint32(reader):
 def ParseUserInfos():
     root_path = r"./mmkvs" # 需要解析的mmkv文件放到mmkvs目录下，可实现批量解析
     fls = os.listdir(root_path)
-    for fl in fls: 
+    for fl in fls:
+        if not fl.endswith('.default'): # 判断文件名后缀是不是.default，如果不是则不做处理
+            continue
         full_path = os.path.join(root_path,fl)
         print('需要解析的mmkv文件路径： ',full_path)
+        dfile = open(os.path.join(root_path,fl+".txt"),"w")
         try:
             with open(full_path, "rb") as file:
                 mmv = MMKV(file)
                 for key in ["key_account_nickname", "key_account_id", "key_account_email",
                             "key_account_phone", "key_account_uid", "key_account_phone_area"]:
                     result = base64.standard_b64decode(mmv.get(key)[1:]).decode("utf-8")
-                    print(f"{key}: {result}")
+                    # print(f"{key}: {result}")
+                    dfile.write(f"{key}: {result}")
+                    dfile.write("\n")
         except Exception as e:
             print(f"Read File Error: {e}")
+
+        dfile.close()
 
 if __name__ == "__main__":
     ParseUserInfos()

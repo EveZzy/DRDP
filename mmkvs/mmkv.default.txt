@@ -1,0 +1,6 @@
+key_account_nickname: djitest
+key_account_id: djiuser-oruxe8p9vnkr
+key_account_email: dc11c5153d344e1a8e9da3b7765b8aa6@sudo8diov.dji.com
+key_account_phone: 18817707586
+key_account_uid: 1272083171242541056
+key_account_phone_area: 86

@@ -126,23 +126,33 @@ class DATFile:
 def extract_dat(path):
     out = {}
     f = open(path, "rb")
-    HEADER_SIZE = 283
-    data = zlib.decompress(f.read())
-    index = 0
-    while True:
-        try:
-            file_size = struct.unpack("<I", data[index+1:index+5])[0]
-            file_name = data[index+7:index+HEADER_SIZE]
-            index += HEADER_SIZE
-            file_name = file_name[:file_name.index(b"\x00")].decode("utf-8")
-            out[file_name] = data[index:index+file_size]
-            index += file_size
-        except:
-            if len(data)!=index:
-                print("toal size:",len(data))
-                print("processed size:", index)
-                traceback.print_exc()
-            break
+    src_data = f.read()
+    baseName = os.path.basename(path)
+    if not baseName.startswith("DJI_"): # 手机端文件
+        fsize = os.path.getsize(path)
+        out[baseName] = src_data[:fsize]
+    else:   # 无人机内部的文件
+        HEADER_SIZE = 283
+        data = zlib.decompress(src_data)
+        # 保存解压zlib处理后的数据
+        # dezlipfile = open("./dezlip.dat","wb")
+        # dezlipfile.write(data)
+        # dezlipfile.close()
+        index = 0
+        while True:
+            try:
+                file_size = struct.unpack("<I", data[index+1:index+5])[0]
+                file_name = data[index+7:index+HEADER_SIZE]
+                index += HEADER_SIZE
+                file_name = file_name[:file_name.index(b"\x00")].decode("utf-8")
+                out[file_name] = data[index:index+file_size]
+                index += file_size
+            except:
+                if len(data)!=index:
+                    print("toal size:",len(data))
+                    print("processed size:", index)
+                    traceback.print_exc()
+                break
     return out
 
 # class FlightRecord(GEModel):
@@ -180,7 +190,8 @@ def ParseDats():
         dat_path = os.path.join(root_path,fl) # 路径拼接，获取绝对路径
         print('需要解析的DAT文件路径： ',dat_path)
         for key,value in extract_dat(dat_path).items():
-            if key.startswith("FLY") and key.endswith(".DAT") and value[16:21] == b"BUILD":
+            # if key.startswith("FLY") and key.endswith(".DAT") and value[16:21] == b"BUILD":
+            if key.endswith(".DAT") and value[16:21] == b"BUILD":
                 for record in DATFile(value).parse_gps_records():
                     # file_record.add_data_item(FlightRecord(*record))
                     # print(record)
