@@ -9,7 +9,7 @@ if __name__ == '__main__':
     argv_length = len(sys.argv)
     if argv_length != 2:
         print("缺少参数...")
-    elif sys.argv[1] == "-a": # 同时解析dat和txt
+    elif sys.argv[1] == "-a": # 同时解析dat，txt，mmkv
         print("开始解析用户信息...")
         userinfo_parser.ParseUserInfos()
         print("开始解析DATS...")
@@ -22,6 +22,6 @@ if __name__ == '__main__':
     elif sys.argv[1] == "-t":# 只解析txt
         print("开始解析txtS...")
         txt_parser.ParseTxts()
-    elif sys.argv[1] == "-u":# 只解析txt
+    elif sys.argv[1] == "-u":# 只解析mmkv文件
         print("开始解析用户信息...")
         userinfo_parser.ParseUserInfos()
