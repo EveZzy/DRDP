@@ -16,10 +16,10 @@ if __name__ == '__main__':
         dat_parser.ParseDats()
         print("开始解析txtS...")
         txt_parser.ParseTxts()
-    elif sys.argv[1] == "-d":# 只解析dat
+    elif sys.argv[1] == "-d":# 只解析dat 
         print("开始解析DATS...")
         dat_parser.ParseDats()
-    elif sys.argv[1] == "-t":# 只解析txt
+    elif sys.argv[1] == "-t":# 只解析txt 
         print("开始解析txtS...")
         txt_parser.ParseTxts()
     elif sys.argv[1] == "-u":# 只解析mmkv文件
