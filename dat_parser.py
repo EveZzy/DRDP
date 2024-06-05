@@ -185,7 +185,7 @@ def ParseDats():
             continue
         csvfile = open(os.path.join(root_path,fl+".csv"), 'w', newline='') # 每一个dat文件，则新建一个csv文件
         csv_writer = csv.writer(csvfile)
-        csv_writer.writerow(['时间','经度','维度']) # 写入表头
+        csv_writer.writerow(['时间','经度','纬度']) # 写入表头
 
         dat_path = os.path.join(root_path,fl) # 路径拼接，获取绝对路径
         print('需要解析的DAT文件路径： ',dat_path)
