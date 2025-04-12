@@ -50,9 +50,9 @@ class MMKV:
                 if not value:
                     del self.data[key]
                 else:
-                    self.data[key] = value            
+                    self.data[key] = value     
         except Exception as e:
-            print(f"Error during decoding: {e}")
+            # print(f"Error during decoding: {e}")
             pass
 
 
@@ -92,7 +92,7 @@ def ParseUserInfos():
             continue
         full_path = os.path.join(root_path,fl)
         print('需要解析的mmkv文件路径： ',full_path)
-        dfile = open(os.path.join(root_path,fl+".txt"),"w")
+        dfile = open(os.path.join(root_path,fl+".txt"),"w", encoding='utf-8')
         try:
             with open(full_path, "rb") as file:
                 mmv = MMKV(file)

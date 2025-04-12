@@ -183,7 +183,7 @@ def ParseDats():
     for fl in fls:
         if not fl.endswith('.DAT'): # 判断文件名后缀是不是.DAT，如果不是则不做处理
             continue
-        csvfile = open(os.path.join(root_path,fl+".csv"), 'w', newline='') # 每一个dat文件，则新建一个csv文件
+        csvfile = open(os.path.join(root_path,fl+".csv"), 'w', newline='', encoding='utf-8') # 每一个dat文件，则新建一个csv文件
         csv_writer = csv.writer(csvfile)
         csv_writer.writerow(['时间','经度','纬度']) # 写入表头
 

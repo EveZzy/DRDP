@@ -258,7 +258,7 @@ class TXTFile:
                     last_gps = ParseOSD(recordData)
                 curIndex += (recordLength+1)  # move to next record
             except Exception as e:
-                print("exception on parse record:", e)
+                # print("exception on parse record:", e)
                 break
         return location_records
         
@@ -373,7 +373,7 @@ def ParseTxts():
     for fl in fls:
         if not fl.endswith('.txt'): # 判断文件名后缀是不是.txt，如果不是则不做处理
             continue
-        csvfile = open(os.path.join(root_path,fl+".csv"), 'w', newline='') # 每一个txt文件，则新建一个csv文件
+        csvfile = open(os.path.join(root_path,fl+".csv"), 'w', newline='', encoding='utf-8') # 每一个txt文件，则新建一个csv文件
         csv_writer = csv.writer(csvfile)
         csv_writer.writerow(['更新时间','经度','维度',"飞行距离","飞行高度(dm)"]) # 写入表头
 
